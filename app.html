@@ -4,21 +4,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="weatherAPI.js"></script>
     
+    <title>WeatherApp</title>
     <body>
     
         <div ng-app="myApp" ng-controller="myCtrl">
-            First Name: <input type="text" ng-model="firstName"><br>
-            Last Name: <input type="text" ng-model="lastName"><br>
+            What's your name? <input type="text" ng-model="firstName"><br>
             <br>
-            Full Name: {{firstName + " " + lastName}}
-
+            
+            <a href="main.html" accesskey="h">Enter</a>
         </div>
 
         <script>
             var app = angular.module('myApp', []);
             app.controller('myCtrl', function($scope) {
-                $scope.firstName = "John";
-                $scope.lastName = "Doe";
+                $scope.firstName = "Buddy";
             });
         </script>
                 <div id="city">cityname</div>
