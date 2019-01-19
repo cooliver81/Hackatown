@@ -8,20 +8,29 @@
     <body>
     
         <div ng-app="myApp" ng-controller="myCtrl">
-            What's your name? <input type="text" ng-model="firstName"><br>
+            What's your name? <input id="myInput" type="text" ng-model="user"><br>
             <br>
             
-            <a href="main.html" accesskey="h">Enter</a>
+            <a id="onEnt"href="main.html" ></a>
         </div>
-
         <script>
+            var input = document.getElementById("myInput");
+            input.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    document.getElementById("onEnt").click();
+                    alert(input);
+                }
+            });
+
             var app = angular.module('myApp', []);
             app.controller('myCtrl', function($scope) {
-                $scope.firstName = "Buddy";
+                $scope.user = "Buddy";
             });
         </script>
                 <div id="city">cityname</div>
                 <div id="temp">temp</div>
+                <div id="description">description</div>
         
     </body>
 </html>
