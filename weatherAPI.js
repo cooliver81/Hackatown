@@ -25,7 +25,6 @@ $(document).ready(function() {
     //Weather API
     function checkWeather(lat, long) {
         var URL = `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`;
-        
         $.getJSON(URL, function(data){
             console.log(data);
             updateWeather(data);

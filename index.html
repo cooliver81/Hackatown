@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="weatherAPI.js"></script>
+   <title>WeatherApp</title>
+  <body>
+       <div ng-app="myApp" ng-controller="myCtrl">
+          What's your name? <input id="myInput" type="text" ng-model="user"><br>
+          <br>
+        
+      </div>
+      <script>
+          var input = document.getElementById("myInput");
+          input.addEventListener("keyup", function(event) {
+              event.preventDefault();
+              if (event.keyCode === 13) {
+                  var inputValue = document.getElementById("myInput").value;
+                  alert(inputValue);
+                  var queryString = "?" + inputValue;
+                  window.location.href="main.html" + queryString;         
+
+              }
+          });
+
+          var app = angular.module('myApp', []);
+          app.controller('myCtrl', function($scope) {
+              $scope.user = "Buddy";
+          });
+      </script>
+  </body>
+</html>
+
+
