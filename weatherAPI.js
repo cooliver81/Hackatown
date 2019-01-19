@@ -13,7 +13,9 @@ $(document).ready(function() {
     
     function updateWeather(data){
         var city = data.name;
+        var temp = data.main.temp;
         
         $('#city').html(city);
+        $('#temp').html(temp);
     }
 });
