@@ -1,21 +1,102 @@
-
-
 <html>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
    <script src="weatherAPI.js"></script>
-   <div id="user"></div>
 
+   <link rel="stylesheet" type="text/css" href="styles.css" />
+   <body onload="startTime()">
+    <h1 id="user"></h1>
+
+    <div class="information">
+            <div id="txt"></div>
+            <div id="city">cityname</div>
+            <div id="temp">temperature</div>
+            <div id="description">description of the weather</div>
+            <p id="clothes">clothes</p>
+    </div>
+
+    <div class="groupBtn">
+            <button class="button" id="refresh" onclick="Refresh()"><span>Refresh Temperature</span></button>
+            <button class="button" id="getClothes" onclick="GetClothes()"><span>What clothes should I wear?</span></button>
+    </div>
+    </body>
    <script>
-       var user;
-       var queryString = decodeURIComponent(window.location.search);
-       queryString = queryString.substring(1);
-       user = queryString;
-       document.getElementById("user").innerHTML = "Hello " + user;
+
+        var tempVar = null;
+        var cityname = null;
+        var description = null;
+
+        //for images later?
+        var clothes;
+        var raining;
+        var snowing;
+
+        var user;
+        var queryString = decodeURIComponent(window.location.search);
+        queryString = queryString.substring(1);
+        user = queryString;
+        document.getElementById("user").innerHTML = "Hello " + user;
+
+        function startTime() {
+          var today = new Date();
+          var h = today.getHours();
+          var m = today.getMinutes();
+          var s = today.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('txt').innerHTML =
+          h + ":" + m;
+          var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+          return i;
+        }
+
+       function GetClothes(){
+           var text = "";
+
+           if (tempVar == null){
+               Refresh();
+           } else{
+                if (raining == true){
+                        text += "Chance of rain! Bring an umbrella!<br>";
+                } else if (snowing == true){
+                    text += "It's snowing! Wear boots!<br>";
+                }
+                if (tempVar > 25){
+                    text += "It's hot out! A T-shirt is enough!<br>";
+                }else if (tempVar > 15){
+                    text += "It's pretty warm! Wear a shirt or something light!<br>";
+                }else if (tempVar > 5){
+                    text += "It's a not too warm! Wear a sweater to keep warm!<br>";
+                }else if (tempVar > -5){
+                    text += "It's pretty cold! Wear a jacket!<br>";
+                }else if (tempVar > -15){
+                    text += "It's cold! Wear a winter coat!<br>";
+                }else {
+                    text += "It's freezing! If you have to go out, bundle up!<br>";
+                }
+                document.getElementById("clothes").innerHTML = text;
+            }
+       }
+
+       function Refresh(){
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.src = 'weatherAPI.js';
+            head.appendChild(script);
+            tempVar = document.getElementById("temp").innerHTML;  
+            cityVar = document.getElementById("city").innerHTML; 
+            descVar = document.getElementById("description").innerHTML;
+            if (descVar.indexOf('rain') >= 0){
+                raining = true;
+            } else if (descVar.indexOf('snow') >= 0){
+                snowing = true;
+            } 
+       }
    </script>
-   <div id="city">cityname</div>
-   <div id="temp">temp</div>
-   <div id="description">description</div>
+   
 </html>
 
 

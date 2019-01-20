@@ -9,7 +9,7 @@ $(document).ready(function() {
     {
       error();
     }
-    
+
     function success(pos) {
         var lat = pos.coords.latitude;
         var long = pos.coords.longitude;
@@ -32,13 +32,18 @@ $(document).ready(function() {
     }
     
     function updateWeather(data){
-        var city = data.name;
-        var temp = data.main.temp;
-        var description = data.weather[0].description;
+        // var city = data.name;
+        // var temp = data.main.temp;
+        // var description = data.weather[0].description;
+
+        var city = "COOL CITY";
+        var temp = -40;
+        var description = "heavy snow";
         
         $('#city').html(city);
-        $('#temp').html("The weather is " + temp);
+        $('#temp').html(temp);
         $('#description').html(description);
+
     }
 });
 
